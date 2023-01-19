@@ -1,11 +1,8 @@
+/* eslint-disable no-unused-vars*/
 <template>
     <div class="board">
-        <div class="WSquare">
-            <img src="../assets/Brook.png"/>
-        </div>
-        <div class="BSquare">
-            <img src="../assets/Bbishop.png"/>
-        </div>
+        <div class="WSquare"><img src="../assets/Brook.png"/></div>
+        <div class="BSquare"><img src="../assets/Bbishop.png"/></div>
         <div class="WSquare"></div>
         <div class="BSquare"></div>
         <div class="WSquare"></div>
@@ -13,8 +10,7 @@
         <div class="WSquare"></div>
         <div class="BSquare"></div>
 
-        <div class="BSquare">
-            <img src="../assets/Bpawn.png"/></div>
+        <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
         <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
         <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
         <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
@@ -84,8 +80,15 @@
     </div>
 </template>
 <script>
+import { usePositionStore } from '@/stores/PositionStore';
+import { mapStores } from 'pinia';
 export default{
-    name : "BoardView"
+    name : "BoardView",
+    setup(){
+        const PositionStore = usePositionStore()
+        PositionStore.newGame()
+    }
+
 }
 </script>
 <style scoped>
