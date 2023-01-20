@@ -1,14 +1,14 @@
 /* eslint-disable no-unused-vars*/
 <template>
     <div class="board">
-        <div class="WSquare"><img src="../assets/Brook.png"/></div>
+        <div class="WSquare"><img src=""/></div>
         <div class="BSquare"><img src="../assets/Bbishop.png"/></div>
         <div class="WSquare"></div>
         <div class="BSquare"></div>
         <div class="WSquare"></div>
         <div class="BSquare"></div>
         <div class="WSquare"></div>
-        <div class="BSquare"></div>
+        <div class="BSquare"><img :src='require(PositionStore.getFigureByPosition(7,7))'/></div>
 
         <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
         <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
@@ -81,13 +81,16 @@
 </template>
 <script>
 import { usePositionStore } from '@/stores/PositionStore';
-import { mapStores } from 'pinia';
+import { computed } from '@vue/runtime-core';
 export default{
     name : "BoardView",
     setup(){
         const PositionStore = usePositionStore()
         PositionStore.newGame()
+        return{PositionStore}
+ let matice = PositionStore.currentPosition
     }
+
 
 }
 </script>
