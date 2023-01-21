@@ -40,10 +40,10 @@ export default{
                 if(X==1 && this.PositionStore.getFigureByPosition(X+1,Y)=="" && this.PositionStore.getFigureByPosition(X+2,Y)==""){
                     this.PositionStore.addMoveOption[X+2,Y]
                 }
-                if(this.PositionStore.getFigureByPosition(X+1,Y-1).chatAt(0)=="B"){
+                if(this.PositionStore.getFigureByPosition(X+1,Y-1).charAt(0)=="B"){
                     this.PositionStore.addMoveOption[X+1,Y-1]
                 }
-                if(this.PositionStore.getFigureByPosition(X+1,Y+1).chatAt(0)=="B"){
+                if(this.PositionStore.getFigureByPosition(X+1,Y+1).charAt(0)=="B"){
                     this.PositionStore.addMoveOption[X+1,Y+1]
                 }
 

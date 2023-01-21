@@ -3,9 +3,15 @@
 </template>
 
 <script>
+import { usePositionStore } from '@/stores/PositionStore';
 export default{
+    
     name : "King",
-
+    setup() {
+            const PositionStore = usePositionStore();
+            return { PositionStore};
+            
+        },
     props:{
         color: {
             required: true,
@@ -13,7 +19,48 @@ export default{
         }
     },
     methods:{
-
+        getMoveOptions(X,Y){
+            if(this.PositionStore.getFigureByPosition(X-1,Y)==""||
+            (this.PositionStore.getFigureByPosition(X-1,Y).charAt(0)=="B" && this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X-1,Y).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X-1,Y])
+            }
+            if(this.PositionStore.getFigureByPosition(X+1,Y)==""||
+            (this.PositionStore.getFigureByPosition(X+1,Y).charAt(0)=="B" && this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X+1,Y).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X+1,Y])
+            }
+            if(this.PositionStore.getFigureByPosition(X+1,Y+1)==""||
+            (this.PositionStore.getFigureByPosition(X+1,Y+1).charAt(0)=="B"&& this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X+1,Y+1).charAt(0)=="W"&& this.color == "B")){
+                this.PositionStore.addMoveOption([X+1,Y+1])
+            }
+            if(this.PositionStore.getFigureByPosition(X+1,Y-1)==""||
+            (this.PositionStore.getFigureByPosition(X+1,Y-1).charAt(0)=="B" && this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X+1,Y-1).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X+1,Y-1])
+            }
+            if(this.PositionStore.getFigureByPosition(X,Y+1)==""||
+            (this.PositionStore.getFigureByPosition(X,Y+1).charAt(0)=="B" && this.color == "W") ||
+            (this.PositionStore.getFigureByPosition(X,Y+1).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X,Y+1])
+            }
+            if(this.PositionStore.getFigureByPosition(X,Y-1)==""||
+            (this.PositionStore.getFigureByPosition(X,Y-1).charAt(0)=="B" && this.color == "W") ||
+            (this.PositionStore.getFigureByPosition(X,Y-1).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X,Y-1])
+            }
+            if(this.PositionStore.getFigureByPosition(X-1,Y)-1==""||
+            (this.PositionStore.getFigureByPosition(X-1,Y-1).charAt(0)=="B" && this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X-1,Y-1).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X-1,Y-1])
+            }
+            if(this.PositionStore.getFigureByPosition(X-1,Y+1)==""||
+            (this.PositionStore.getFigureByPosition(X-1,Y+1).charAt(0)=="B" && this.color == "W")||
+            (this.PositionStore.getFigureByPosition(X-1,Y+1).charAt(0)=="W" && this.color == "B")){
+                this.PositionStore.addMoveOption([X-1,Y+1])
+            }
+        }
     },
     computed:{
         ImgSrc(){
