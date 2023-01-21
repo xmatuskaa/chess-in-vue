@@ -50,6 +50,11 @@ export const usePositionStore = defineStore('position', {
             // }
             console.log(this.getFigureByPosition(7, 7))
 
+        },
+
+        deleteFromCoords(X, Y) {
+            this.currentPosition[X][Y] = ""
+
         }
     }
 })

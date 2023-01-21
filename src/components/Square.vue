@@ -3,19 +3,17 @@ props barva obrazek
   <div :class="{ WSquare: this.color == 'W', BSquare: this.color == 'B' }">
     {{ coordinateX }}{{ coordinateY }}
     <!-- <component :is="icon" /> -->
-    <img v-if="icon" :src=icon />
+    <img :src="getImgSrc()" />
   </div>
 </template>
 
-<!-- <script>
+<script>
 import { usePositionStore } from '@/stores/PositionStore';
-import { defineAsyncComponent } from '@vue/runtime-core';
 export default {
     name: "Square",
     setup() {
             const PositionStore = usePositionStore();
-            const img = defineAsyncComponent(()=> import("../assets/"+ this.img + ".png"))
-            return { PositionStore, img};
+            return { PositionStore};
             
         },
     props:{
@@ -35,37 +33,15 @@ export default {
             required: true,
             type: String
         }
-
+    },
+    methods:{
+        getImgSrc(){
+           
+            return ("../assets/"+ this.img + ".png")
+        }
     }
 }
-</script> -->
-
-<script setup>
-import { computed, ref } from 'vue'
-import { usePositionStore } from "@/stores/PositionStore";
-const PositionStore = usePositionStore();
-const icon = ref(`../assets/${props.img}.png`)
-
-const props = defineProps({
-  color: {
-    type: String,
-    required: true,
-  },
-  coordinateX: {
-    type: Number,
-    required: false,
-  },
-  coordinateY: {
-    type: Number,
-    required: false,
-  },
-  img: {
-    required: true,
-    type: String,
-  },
-});
 </script>
-
 <style>
 .WSquare {
   background-color: beige;
