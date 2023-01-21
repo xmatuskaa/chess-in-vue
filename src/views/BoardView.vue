@@ -1,6 +1,6 @@
 <template>
     <div class="board">
-        <Square v-for="n in 64" :key="n" :color="this.getColor(n)" :coordinateX="this.getCoordinateX(n)" :coordinateY="this.getCoordinateY(n)"/>
+        <Square v-for="n in 64" :key="n" :color="getColor(n)" :coordinateX="getCoordinateX(n)" :coordinateY="getCoordinateY(n)" :img="PositionStore.getFigureByPosition(getCoordinateX(n),getCoordinateY(n))"/>
     </div>
 </template>
 
