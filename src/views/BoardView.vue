@@ -1,99 +1,50 @@
-/* eslint-disable no-unused-vars*/
 <template>
     <div class="board">
-        <div class="WSquare"><img src=""/></div>
-        <div class="BSquare"><img src="../assets/Bbishop.png"/></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"><img :src='require(PositionStore.getFigureByPosition(7,7))'/></div>
-
-        <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="BSquare"><img src="../assets/Bpawn.png"/></div>
-        <div class="WSquare"><img src="../assets/Bpawn.png"/></div>
-
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        
-
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare">
-            <img src="../assets/Wqueen.png"/>
-        </div>
-        <div class="BSquare">
-            <img src="../assets/Wking.png"/>
-        </div>
-        <div class="WSquare"></div>
-        <div class="BSquare"></div>
-        <div class="WSquare"></div>
+        <Square v-for="n in 64" :key="n" :color="this.getColor(n)" :coordinateX="this.getCoordinateX(n)" :coordinateY="this.getCoordinateY(n)"/>
     </div>
 </template>
+
 <script>
-import { usePositionStore } from '@/stores/PositionStore';
-import { computed } from '@vue/runtime-core';
-export default{
-    name : "BoardView",
-    setup(){
-        const PositionStore = usePositionStore()
-        PositionStore.newGame()
-        return{PositionStore}
- let matice = PositionStore.currentPosition
+    import Square from '@/components/Square.vue';
+    import { usePositionStore } from '@/stores/PositionStore';
+    export default{
+        name: "BoardView",
+        setup() {
+            const PositionStore = usePositionStore();
+            PositionStore.newGame();
+            return { PositionStore };
+        },
+        components: { Square },
+        methods: {
+            getColor(sequenceNumber){
+                if((sequenceNumber%2==1 && (sequenceNumber<8 ||
+                 (sequenceNumber>16 && sequenceNumber<24) ||
+                 (sequenceNumber>32 && sequenceNumber<40) ||
+                 (sequenceNumber>48 && sequenceNumber<56)))||
+                 (sequenceNumber%2==0 && 
+                 ((sequenceNumber>8 && sequenceNumber<=16) ||
+                 (sequenceNumber>24 && sequenceNumber<=32) ||
+                 (sequenceNumber>40 && sequenceNumber<=48) ||
+                 (sequenceNumber>56 && sequenceNumber<=64)))){
+                    return 'W'
+                }
+                else return 'B'
+            },
+            getCoordinateY(sequenceNumber){
+                if(sequenceNumber%8 == 0 && sequenceNumber!=0){
+                    return 7
+                }
+                return sequenceNumber%8-1
+            },
+            getCoordinateX(sequenceNumber){
+                return Math.floor((sequenceNumber-1)/8)
+            }
+        }
+
+
     }
-
-
-}
 </script>
+
 <style scoped>
     .WSquare{
         background-color: beige;

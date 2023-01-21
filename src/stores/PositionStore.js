@@ -6,9 +6,7 @@ export const usePositionStore = defineStore('position', {
     }),
 
     getters: {
-        getFigureByPosition: state => (a, b) => "../assets/" + state.currentPosition[a][b] + ".png"
-
-
+        getFigureByPosition: state => (a, b) => state.currentPosition[a][b]
     },
 
     actions: {

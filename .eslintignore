@@ -1,2 +1,4 @@
 BoardView.vue
 PositionStore.js
+Square.vue
+Pawn.vue
