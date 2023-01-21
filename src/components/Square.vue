@@ -1,14 +1,20 @@
 props barva obrazek 
 <template >
-  <div :class="{ WSquare: this.color == 'W', BSquare: this.color == 'B' }">
+  <div :class="{ WSquare: this.color == 'W', BSquare: this.color == 'B' }" @click="onClick()">
     {{ coordinateX }}{{ coordinateY }}
-    <!-- <component :is="icon" /> -->
-    <img :src="getImgSrc()" />
+    <component v-if="getComponent !=''" :is="getComponent" v-bind="{color: this.getColor}" />
+    <!-- <img :src="getImgSrc()" /> -->
   </div>
 </template>
 
 <script>
 import { usePositionStore } from '@/stores/PositionStore';
+import Pawn from './figures/Pawn.vue';
+import Queen from './figures/Queen.vue';
+import Rook from './figures/Rook.vue';
+import King from './figures/King.vue';
+import Bishop from './figures/Bishop.vue';
+import Knight from './figures/Knight.vue';
 export default {
     name: "Square",
     setup() {
@@ -16,6 +22,7 @@ export default {
             return { PositionStore};
             
         },
+        
     props:{
         color: {
             type: String,
@@ -29,16 +36,35 @@ export default {
         type: Number,
         required: false 
         },
-        img: {
+        figure: {
             required: true,
             type: String
         }
     },
-    methods:{
-        getImgSrc(){
-           
-            return ("../assets/"+ this.img + ".png")
+    computed:{
+        getColor(){
+            return this.figure.charAt(0)
+        },
+        getComponent(){
+            const name= this.figure.substring(1)
+            if(name === "queen") return Queen
+            else if(name === "pawn") return Pawn
+            else if(name === "rook") return Rook
+            else if(name === "king") return King
+            else if(name === "bishop") return Bishop
+            else if(name === "knight") return Knight
+            else return ""
         }
+
+    },
+    methods:{
+        onClick(){
+            this.PositionStore.setSelectedPosition(this.coordinateX,this.coordinateY)
+            // component.getMoveOptions(this.coordinateX, this.coordinateY)
+
+        }
+
+
     }
 }
 </script>

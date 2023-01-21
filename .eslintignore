@@ -2,3 +2,8 @@ BoardView.vue
 PositionStore.js
 Square.vue
 Pawn.vue
+Queen.vue
+King.vue
+Knight.vue
+Bishop.vue
+Rook.vue
