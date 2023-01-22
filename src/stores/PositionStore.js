@@ -4,11 +4,17 @@ export const usePositionStore = defineStore('position', {
     state: () => ({
         currentPosition: Array(8),
         selectedPosition: null,
-        moveOptions: []
+        moveOptions: [],
+        nextMove: "W"
     }),
 
     getters: {
-        getFigureByPosition: state => (a, b) => state.currentPosition[a][b]
+        getFigureByPosition: state => (a, b) => {
+            if (a > -1 && a < 8 && b > -1 && b < 8) {
+                return state.currentPosition[a][b]
+            }
+            else return "void"
+        },
     },
 
     actions: {
@@ -43,7 +49,6 @@ export const usePositionStore = defineStore('position', {
             for (let i = 0; i < this.currentPosition.length; i++) {
                 this.currentPosition[6][i] = "Wpawn"
             }
-
         },
 
         deleteFromCoords(X, Y) {
@@ -57,11 +62,18 @@ export const usePositionStore = defineStore('position', {
             this.moveOptions = []
         },
         addMoveOption(X, Y) {
-            this.moveOptions.push[X, Y]
+            this.moveOptions.push([X, Y])
+        },
+        isMoveOption(X, Y) {
+            const array = [X, Y]
+            if (this.moveOptions.some(a => array.every((v, i) => v === a[i]))) return true
+            else return false
+        },
+        moveFigureTo(X, Y) {
+            this.currentPosition[X][Y] = this.currentPosition[this.selectedPosition[0]][this.selectedPosition[1]]
+            this.currentPosition[this.selectedPosition[0]][this.selectedPosition[1]] = ""
+            this.selectedPosition = null
+            this.moveOptions = []
         }
     }
 })
-
-
-
-

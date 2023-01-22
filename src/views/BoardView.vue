@@ -1,8 +1,9 @@
 <template>
     <button @click="PositionStore.deleteFromCoords(1,1)">delete</button>
-    {{ PositionStore.selectedPosition }}
+    Position: {{ PositionStore.selectedPosition }} Options: {{ PositionStore.moveOptions }}
     <div class="board">
-        <Square v-for="n in 64" :key="n" :color="getColor(n)" :coordinateX="getCoordinateX(n)" :coordinateY="getCoordinateY(n)" :figure="PositionStore.getFigureByPosition(getCoordinateX(n),getCoordinateY(n))"/>
+        <Square v-for="n in 64" :key="n" :color="getColor(n)" :coordinateX="getCoordinateX(n)" :coordinateY="getCoordinateY(n)" :figure="PositionStore.getFigureByPosition(getCoordinateX(n),getCoordinateY(n))"
+        ></Square>
     </div>
 </template>
 

@@ -2,8 +2,7 @@ props barva obrazek
 <template >
   <div :class="{ WSquare: this.color == 'W', BSquare: this.color == 'B' }" @click="onClick()">
     {{ coordinateX }}{{ coordinateY }}
-    <component v-if="getComponent !=''" :is="getComponent" v-bind="{color: this.getColor}" />
-    <!-- <img :src="getImgSrc()" /> -->
+    <component v-if="getComponent !=''" :is="getComponent" v-bind="{color: this.getColor}"/>
   </div>
 </template>
 
@@ -15,6 +14,7 @@ import Rook from './figures/Rook.vue';
 import King from './figures/King.vue';
 import Bishop from './figures/Bishop.vue';
 import Knight from './figures/Knight.vue';
+import moveOptions, { setMoves } from "../utils/moveOptions"
 export default {
     name: "Square",
     setup() {
@@ -58,10 +58,16 @@ export default {
 
     },
     methods:{
-        onClick(){
+        async onClick(){
+            if( this.PositionStore.isMoveOption(this.coordinateX, this.coordinateY) &&
+             this.PositionStore.getFigureByPosition(this.PositionStore.selectedPosition[0],this.PositionStore.selectedPosition[1]).charAt(0)==this.PositionStore.nextMove){
+              this.PositionStore.moveFigureTo(this.coordinateX, this.coordinateY)
+              if(this.PositionStore.nextMove == "W") this.PositionStore.nextMove = "B"
+              else if(this.PositionStore.nextMove == "B") this. PositionStore.nextMove = "W"
+          }
+          else{
             this.PositionStore.setSelectedPosition(this.coordinateX,this.coordinateY)
-            // component.getMoveOptions(this.coordinateX, this.coordinateY)
-
+            setMoves(this.coordinateX, this.coordinateY)}
         }
 
 

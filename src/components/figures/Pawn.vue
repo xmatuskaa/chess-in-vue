@@ -1,5 +1,5 @@
 <template>
-    <img :src="ImgSrc" />
+    <img :src="ImgSrc"/>
 </template>
 
 <script>
@@ -15,8 +15,8 @@ export default{
         color: {
             required: true,
             type: String
-        }
-    },
+        },
+    }, 
     methods:{
         getMoveOptions(X,Y){
             if(this.color = "W"){
@@ -58,6 +58,7 @@ export default{
 
     }
 }
+
 </script>
 
 <style>

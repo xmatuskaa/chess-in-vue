@@ -7,3 +7,4 @@ King.vue
 Knight.vue
 Bishop.vue
 Rook.vue
+moveOptions.js
