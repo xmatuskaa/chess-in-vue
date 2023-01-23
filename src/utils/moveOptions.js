@@ -35,7 +35,7 @@ export function setMoves(coordinateX, coordinateY) {
                     helperY--
                 }
                 if ((color == "B" && PositionStore.getFigureByPosition(X, helperY - 1).charAt(0) == "W") ||
-                    (color == "W" && PositionStore.getFigureByPosition(X, helperY).charAt(0) == "B")) {
+                    (color == "W" && PositionStore.getFigureByPosition(X, helperY - 1).charAt(0) == "B")) {
                     PositionStore.addMoveOption(X, helperY - 1)
                 }
                 helperY = Y
@@ -152,7 +152,7 @@ export function setMoves(coordinateX, coordinateY) {
                 helperY--
             }
             if ((color == "B" && PositionStore.getFigureByPosition(X, helperY - 1).charAt(0) == "W") ||
-                (color == "W" && PositionStore.getFigureByPosition(X, helperY).charAt(0) == "B")) {
+                (color == "W" && PositionStore.getFigureByPosition(X, helperY - 1).charAt(0) == "B")) {
                 PositionStore.addMoveOption(X, helperY - 1)
             }
             helperY = Y

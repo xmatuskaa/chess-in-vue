@@ -14,7 +14,8 @@ import Rook from './figures/Rook.vue';
 import King from './figures/King.vue';
 import Bishop from './figures/Bishop.vue';
 import Knight from './figures/Knight.vue';
-import moveOptions, { setMoves } from "../utils/moveOptions"
+import { setMoves } from "../utils/moveOptions";
+import { inCheck } from '@/utils/inCheck';
 export default {
     name: "Square",
     setup() {
@@ -68,8 +69,9 @@ export default {
           else{
             this.PositionStore.setSelectedPosition(this.coordinateX,this.coordinateY)
             setMoves(this.coordinateX, this.coordinateY)}
+            inCheck()
         }
-
+        
 
     }
 }
